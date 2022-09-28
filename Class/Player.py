@@ -1,14 +1,22 @@
 import pygame
+
+from Class.Bullet import Bullet
+from Variable import Variable
+from main import player_img, all_sprites, bullets, shoot_sound
+
+var = Variable()
+
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.transform.scale(player_img, (50, 38))
-        self.image.set_colorkey(BLACK)
+        self.image.set_colorkey(var.BLACK)
         self.rect = self.image.get_rect()
         self.radius = 20
         # pygame.draw.circle(self.image, RED, self.rect.center, self.radius)
-        self.rect.centerx = WIDTH / 2
-        self.rect.bottom = HEIGHT - 10
+        self.rect.centerx = var.WIDTH / 2
+        self.rect.bottom = var.HEIGHT - 10
         self.speedx = 8
         self.health = 100
         self.lives = 3
@@ -16,6 +24,7 @@ class Player(pygame.sprite.Sprite):
         self.hide_time = 0
         self.gun = 1
         self.gun_time = 0
+
     def update(self):
         now = pygame.time.get_ticks()
         if self.gun > 1 and now - self.gun_time > 5000:
@@ -23,19 +32,20 @@ class Player(pygame.sprite.Sprite):
             self.gun_time = now
         if self.hidden and now - self.hide_time > 1000:
             self.hidden = False
-            self.rect.centerx = WIDTH / 2
-            self.rect.bottom = HEIGHT - 10
+            self.rect.centerx = var.WIDTH / 2
+            self.rect.bottom = var.HEIGHT - 10
         key_pressed = pygame.key.get_pressed()
         if key_pressed[pygame.K_RIGHT]:
             self.rect.x += self.speedx
         if key_pressed[pygame.K_LEFT]:
             self.rect.x -= self.speedx
-        if self.rect.right > WIDTH:
-            self.rect.right = WIDTH
+        if self.rect.right > var.WIDTH:
+            self.rect.right = var.WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
+
     def shoot(self):
-        if not(self.hidden):
+        if not (self.hidden):
             if self.gun == 1:
                 bullet = Bullet(self.rect.centerx, self.rect.top)
                 all_sprites.add(bullet)
@@ -53,7 +63,7 @@ class Player(pygame.sprite.Sprite):
     def hide(self):
         self.hidden = True
         self.hide_time = pygame.time.get_ticks()
-        self.rect.center = (WIDTH / 2, HEIGHT + 500)
+        self.rect.center = (var.WIDTH / 2, var.HEIGHT + 500)
 
     def gunup(self):
         self.gun += 1
