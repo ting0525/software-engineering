@@ -1,0 +1,30 @@
+<DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width , initial-scal=1.0">
+            <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename ='css/style.css') }}">
+            <title>rank</title>
+        </head>
+        <body>
+          <div>
+            <h1 class="title_word">Welcome to Space Survival</h1>
+            <video class="video-back" autoplay loop muted>
+              <source src="static\src\video (2).mp4" >
+            </video>
+          </div>
+          <table>
+            <tr>
+              <th>id</th>
+              <th>score</th>
+            </tr>
+            <tr>
+                <td>{{content[0][0]}}</td>
+                <td>{{content[0][1]}}</td>
+            </tr>
+          </table>
+          <h3>Input ID select your Score</h3>
+          <h4>download Space Survival</h4>
+          <input id="input2" type="button" value="download" name="按鈕名稱" style="width:150px;height:50px;">
+        </body>
+    </html>
