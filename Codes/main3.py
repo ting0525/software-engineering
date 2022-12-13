@@ -103,5 +103,6 @@ def main():
     print(score)
     #dic = {'id' : Variable.idtext , 'score' : score}
     #print(dic)
-    req_get(Variable.idtext , score)
+    token = 123456
+    req_get(Variable.idtext , score , token)
     

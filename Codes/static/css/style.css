@@ -34,7 +34,7 @@ table td{
 }
 
 .title_word{
-  color:rgb(247, 25, 25);
+  color:rgb(255, 255, 255);
   text-align:center;
   z-index: 1;
   position:absolute;
@@ -43,6 +43,16 @@ table td{
   left:25%;
 }
 
+.big_word{
+  color:rgb(255, 255, 255);
+  text-align:center;
+  z-index: 1;
+  position:absolute;
+  font-size: 60px;
+  text-align:center;
+  left:40%;
+  top:35%;
+}
 
 .switch{
   color:white;
@@ -62,6 +72,8 @@ table td{
   left: 55%;
   width:300px;
   height:50px;
+  border-radius: 6px 12px 6px 12px; 
+  
 }
 
 #input_s{
@@ -72,12 +84,41 @@ table td{
   height:30px;
 }
 
+#input_back{
+  position:absolute;
+  top: 90%;
+  left: 10%;
+  width:150px;
+  height:30px;
+}
+
+.btn {
+  color: #0099CC; 
+  background: transparent; 
+  border: 2px solid #0099CC;
+   
+  
+}
+
+.btn1{
+  color: #0099CC; 
+  background: transparent; 
+  border: 2px solid #0099CC;
+  border-radius: 6px 24px 6px 24px; 
+  color: rgb(7, 178, 240); 
+  border: 2px solid #008CBA;
+}
+.btn1:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
 h3{
   position:absolute;
   top:20%;
   left:55%;
   font-size: 35px;
-  color:cornflowerblue
+  color:rgb(16, 238, 246)
 }
 
 h4{
@@ -85,14 +126,13 @@ h4{
   top:45%;
   left:55%;
   font-size: 35px;
-  color:cornflowerblue
+  color:rgb(16, 238, 246)
 }
 
 #input2{
   position:absolute;
   top:60%;
   left:55%;
-  color:rgb(0, 0, 0)
 }
 
 

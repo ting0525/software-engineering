@@ -116,7 +116,7 @@ def frame():
         
         
 
-def req_get(idtext , score):
-    res = requests.get('http://localhost:80/api/add_message/1234', json={"id":idtext , "score":score})
+def req_get(idtext , score , token):
+    res = requests.get('http://localhost:80/api/add_message/1234', json={"id":idtext , "score":score , "my_token":token})
     if res.ok:
         print(res.json())
