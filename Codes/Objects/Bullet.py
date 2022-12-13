@@ -1,8 +1,9 @@
 import pygame
+
+from Utils.ImageLoader import ImageLoader
+from Utils.Initializer import Initializer
+from Utils.SoundLoader import SoundLoader
 from Variable import Variable
-from ImageLoader import ImageLoader
-from Initializer import Initializer
-from SoundLoader import SoundLoader
 
 var = Variable()
 img = ImageLoader()

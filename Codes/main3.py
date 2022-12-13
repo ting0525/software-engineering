@@ -1,18 +1,11 @@
 # 太空生存戰
 import pygame
 import random
-import os
-from Variable import Variable
-from ImageLoader import ImageLoader
-from Initializer import Initializer
-from SoundLoader import SoundLoader
-from Functions import *
-from Bullet import Bullet
-from Explosion import Explosion
-from Player import Player
-from Power import Power
-from Rock import Rock
-import requests
+from Codes.Utils.Functions import *
+from Codes.Objects.Explosion import Explosion
+from Codes.Objects.Player import Player
+from Codes.Objects.Power import Power
+
 # var = Variable()
 img = ImageLoader()
 initer = Initializer()

@@ -1,14 +1,15 @@
 import pygame
 import os
+
+
 class Variable:
     FPS = 60
     WIDTH = 500
     HEIGHT = 600
-    
-    
-    idtext = 0
-    id = 0
-    score = 0
+
+    IDTEXT = 0
+    ID = 0
+    SCORE = 0
 
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
@@ -16,9 +17,9 @@ class Variable:
     RED = (255, 0, 0)
     YELLOW = (255, 255, 0)
 
-    all_sprites = pygame.sprite.Group()
-    rocks = pygame.sprite.Group()
-    bullets = pygame.sprite.Group()
-    powers = pygame.sprite.Group()
+    ALL_SPRITES = pygame.sprite.Group()
+    ROCKS = pygame.sprite.Group()
+    BULLETS = pygame.sprite.Group()
+    POWERS = pygame.sprite.Group()
 
-    font_name = os.path.join("../font.ttf")
+    FONT_NAME = os.path.join("../font.ttf")

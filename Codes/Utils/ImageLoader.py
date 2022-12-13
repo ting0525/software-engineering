@@ -1,7 +1,8 @@
 import pygame
 import os
+
+from Utils.Initializer import Initializer
 from Variable import Variable
-from Initializer import Initializer
 var = Variable()
 initer = Initializer()
 class ImageLoader:

@@ -1,11 +1,11 @@
 import pygame
+
+from Utils.ImageLoader import ImageLoader
+from Utils.Initializer import Initializer
+from Utils.SoundLoader import SoundLoader
 from Variable import Variable
-from ImageLoader import ImageLoader
-from Initializer import Initializer
-from SoundLoader import SoundLoader
-from Rock import Rock
+from Codes.Objects.Rock import Rock
 import requests
-import json
 
 # var = Variable()
 img = ImageLoader()
