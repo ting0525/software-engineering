@@ -3,9 +3,10 @@ import os
 
 
 class Variable:
-    FPS = 60
-    WIDTH = 500
-    HEIGHT = 600
+    FPS = 120
+    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+
+    WIDTH, HEIGHT = screen.get_size()
 
     IDTEXT = 0
     ID = 0

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session , jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from multiprocessing import connection
 import mysql.connector
 from flask_mysqldb import MySQL
@@ -15,21 +15,20 @@ app.config['MYSQL_PORT'] = '3306'             # Port號（預設就是3306)
 mysql = MySQL(app)
 '''
 
-connection = mysql.connector.connect(  
-    host = '127.0.0.1' ,
-    port = '3306' , 
-    user = 'root', 
-    password = '123456'
+
+connection = mysql.connector.connect(
+    host='127.0.0.1',
+    port='3306',
+    user='root',
+    password='123456'
 )
 
 cursor = connection.cursor()
 
-
-
 app = Flask(__name__)
 
 
-@app.route('/rank' ,methods=['GET', 'POST'])
+@app.route('/rank', methods=['GET', 'POST'])
 def rank():
     if request.method == "POST":
         idtext = request.values.get('username')
@@ -56,7 +55,7 @@ def rank():
             cursor.execute(select_id, id_tuple)
             content = cursor.fetchall()
             print(content)
-            return render_template('select.html' , content=content)
+            return render_template('select.html', content=content)
         elif token == False:
             return render_template('Not find.html')
     else:
@@ -65,39 +64,40 @@ def rank():
         sql = "SELECT * FROM `game2` ORDER BY `score` DESC LIMIT 15;"
         cursor.execute(sql)
         content = cursor.fetchall()
-        number = (1,2,3,4,5)
-        return render_template('index.html' , content=content , len=len(number))
+        number = (1, 2, 3, 4, 5)
+        return render_template('index.html', content=content, len=len(number))
 
 
 @app.route('/api/add_message/<dic>', methods=['GET'])
 def add_message(dic):
-    if request.method == 'GET': 
+    if request.method == 'GET':
         id = request.json['id']
         score = request.json['score']
-        my_token = request.json['my_token']  
+        my_token = request.json['my_token']
         print(id)
         print(score)
         print(type(id))
         print(type(score))
         if my_token == 123456:
-            #print(type(data))
+            # print(type(data))
             cursor = connection.cursor()
             cursor.execute("USE `test`;")
-            #cursor.execute('CREATE TABLE `asd`(mystr varchar(20));')
-            #id = "handwrite"
-            #score = 87
-        
-            insert_id = "INSERT INTO `game2` (id , score) VALUES(%s,%s);" 
-            score_tuple = (id,score)
-        
+            # cursor.execute('CREATE TABLE `asd`(mystr varchar(20));')
+            # id = "handwrite"
+            # score = 87
+
+            insert_id = "INSERT INTO `game2` (id , score) VALUES(%s,%s);"
+            score_tuple = (id, score)
+
             cursor.execute(insert_id, score_tuple)
             connection.commit()
             cursor.execute("SELECT * FROM `game2` ORDER BY  `score` DESC LIMIT 3;")
             records = cursor.fetchall()
             for r in records:
                 print(r)
-            return jsonify({"dic":dic})
-    
+            return jsonify({"dic": dic})
+
+
 '''
 @app.route('/rank/select/' , methods=['GET' , 'POST'])
 def select():
@@ -115,13 +115,9 @@ def select():
         return render_template('index.html' , content=content)
 '''
 
-
-
-
-
 if __name__ == '__main__':
-    app.run(host= '0.0.0.0',debug=True , port=80)
-    
+    app.run(host='0.0.0.0', debug=True, port=80)
+
 '''
 def add_message(dic):
     content = request.json
@@ -134,7 +130,6 @@ if __name__ == '__main__':
     app.run(host= '0.0.0.0',debug=True)
     
 '''
-
 
 '''
 connection = mysql.connector.connect(  
@@ -155,12 +150,12 @@ def record(content):
     connection.commit()
 '''
 
-#cur = mysql.connection.cursor()
-    #cur.execute("INSERT INTO `game` (id , score) VALUES (%s,%d)" , (id , score))
-    #mysql.connection.commit()
-    
-    
-    #cur = mysql.connection.cursor()
-        #sql = "INSERT INTO `game` (id , score) VALUES ('{id}' , '{score}');"
-        #cur.execute(sql, id , score)
-        #print(sql)
+# cur = mysql.connection.cursor()
+# cur.execute("INSERT INTO `game` (id , score) VALUES (%s,%d)" , (id , score))
+# mysql.connection.commit()
+
+
+# cur = mysql.connection.cursor()
+# sql = "INSERT INTO `game` (id , score) VALUES ('{id}' , '{score}');"
+# cur.execute(sql, id , score)
+# print(sql)
