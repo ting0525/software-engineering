@@ -6,7 +6,7 @@ from Utils.ImageLoader import ImageLoader
 from Utils.Initializer import Initializer
 from Utils.SoundLoader import SoundLoader
 from Variable import Variable
-from Codes.Objects.Rock import Rock
+from Objects.Rock import Rock
 import requests
 
 var = Variable()
@@ -102,7 +102,7 @@ def frame():
 
 
 def req_get(idtext, score, token):
-    res = requests.get('http://localhost:80/api/add_message/1234',
+    res = requests.get('http://127.0.0.1:80/api/add_message/1234',
                        json={"id": idtext, "score": score, "my_token": token})
     if res.ok:
         print(res.json())

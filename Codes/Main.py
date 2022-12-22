@@ -1,5 +1,5 @@
 import random
-import urllib.request
+import webbrowser
 
 import pygame
 import os
@@ -150,8 +150,12 @@ def options():
 
 
 def url():
-    while True:
-        urllib.request.urlopen('http://127.0.0.1:80/')
+    urL='http://127.0.0.1:80/rank'
+    webbrowser.get('windows-default').open_new(urL)
+    pygame.quit()
+    
+    #while True:
+    #    urllib.request.urlopen('http://127.0.0.1:80/rank')
 
 
 def main_menu():
