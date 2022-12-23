@@ -37,6 +37,7 @@ pip install -r module.txt
 ```
 
 ## start game
-```cd Codes
+```shell
+cd Codes
 python Main.py
 ```
