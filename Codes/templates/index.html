@@ -8,6 +8,7 @@
     </head>
     <body>
       <div>
+        <img id="py" src="static\src\py.png"  >
         <h1 class="title_word">Welcome to Space Survival</h1>
         <video class="video-back" autoplay loop muted>
           <source src="static\src\video (2).mp4" >
@@ -34,12 +35,12 @@
           {% endfor %}
         </tbody>
       </table>
-      <h3>Input ID select your Score</h3>
+      <h3 style="font-family:fantasy">Input ID select your Score</h3>
       <form method='post' action="/rank"> 
         <input id="input1" type='text' name='username'>
         <button id="input_s" class="btn1" type='submit'>Submit</button>
       </form>
-      <h4>download Space Survival</h4>
+      <h4 style="font-family:fantasy">download Space Survival</h4>
       <form method="get" action="https://github.com/ting0525/c/archive/refs/heads/master.zip">
         <input class="btn1" id="input2" type="submit" value="download" name="n" style="width:150px;height:50px;">
       </form>

@@ -5,6 +5,8 @@ from flask_mysqldb import MySQL
 import MySQLdb
 import pymysql
 
+
+#資料庫設定
 '''
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'          # 登入ip
@@ -75,15 +77,8 @@ def rank():
             token = kmp_match(m , idtext)
             if token==True:
                 break
-            '''
-            if idtext in m:
-                token = True
-                print(token)
-                print("子字串比對成功")
-                break
-            else:
-                print("NO")
-            '''
+            
+            
         if token == True:
             cursor = connection.cursor()
             cursor.execute("USE `test`;")
@@ -91,7 +86,6 @@ def rank():
             id_tuple = (idtext,)
             print(id_tuple)
             cursor.execute(select_id)
-            #cursor.execute(select_id, id_tuple)
             content = cursor.fetchall()
             print(content)
             length=len(content)
@@ -148,96 +142,3 @@ if __name__ == '__main__':
     
     
     
-'''
-# 實現KMP算法的函數
-def KMP(text, pattern):
- 
-    # 基本情況 1：模式為空
-    if not pattern:
-        print('The pattern occurs with shift 0')
-        return
- 
-    # 基本情況 2：文本為空，或文本的長度小於模式的長度
-    if not text or len(pattern) > len(text):
-        print('Pattern not found')
-        return
- 
-    chars = list(pattern)
- 
-    # next[i] 存儲下一個最佳部分匹配的索引
-    next = [0] * (len(pattern) + 1)
- 
-    for i in range(1, len(pattern)):
-        j = next[i + 1]
- 
-        while j > 0 and chars[j] is not chars[i]:
-            j = next[j]
- 
-        if j > 0 or chars[j] == chars[i]:
-            next[i + 1] = j + 1
- 
-    j = 0
-    for i in range(len(text)):
-        if j < len(pattern) and text[i] == pattern[j]:
-            j = j + 1
-            if j == len(pattern):
-                #print('Pattern occurs with shift', (i - j + 1))
-                token = True
-                return token
-        elif j > 0:
-            j = next[j]
-            i = i - 1        # 因為 `i` 將在下一次迭代中遞增
- 
- 
-
- 
-#text = 'ABCABAABCABAC'
-#pattern = 'CAB'
- 
-#KMP(text, pattern)
-''' 
-    
-    
-
-'''
-def add_message(dic):
-    content = request.json
-    print(content)
-    print(type(content))
-    print(content['id'])
-    return jsonify({"dic":dic})
-
-if __name__ == '__main__':
-    app.run(host= '0.0.0.0',debug=True)
-    
-'''
-
-
-'''
-connection = mysql.connector.connect(  
-    host = '127.0.0.1' ,
-    port = '3306' , 
-    user = 'root', 
-    password = '123456'
-    )
-def record(content):
-    cursor = connection.cursor()
-    cursor.execute("USE `test`;")
-    id = content['id']
-    score = content['score']
-    print(id)
-    print(score)
-    insert_stmt = "INSERT INTO `game` VALUES(%s,%d);"
-    cursor.execute(insert_stmt, id , score)
-    connection.commit()
-'''
-
-#cur = mysql.connection.cursor()
-    #cur.execute("INSERT INTO `game` (id , score) VALUES (%s,%d)" , (id , score))
-    #mysql.connection.commit()
-    
-    
-    #cur = mysql.connection.cursor()
-        #sql = "INSERT INTO `game` (id , score) VALUES ('{id}' , '{score}');"
-        #cur.execute(sql, id , score)
-        #print(sql)
