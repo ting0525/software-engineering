@@ -1,31 +1,34 @@
 <DOCTYPE html>
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width , initial-scal=1.0">
-            <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename ='css/style.css') }}">
-            <title>rank</title>
-        </head>
-        <body>
-          <div>
-            <h1 class="title_word">Welcome to Space Survival</h1>
-            <video class="video-back" autoplay loop muted>
-              <source src="static\src\video (2).mp4" >
-            </video>
-          </div>
-          <table>
-            <tr>
-              <th>id</th>
-              <th>score</th>
-            </tr>
-            <tr>
-                <td>{{content[0][0]}}</td>
-                <td>{{content[0][1]}}</td>
-            </tr>
-          </table>
-          <h3>You’re bigger than this!</h3>
-          <h4>download Space Survival</h4>
-          <input class="btn1" id="input2" type="button" value="download" name="按鈕名稱" style="width:150px;height:50px;">
-          <input class="btn1" id="input_back" type ="button" onclick="history.back()" value="Back"></input>
-        </body>
-    </html>
+  <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width , initial-scal=1.0">
+          <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename ='css/style.css') }}">
+          <title>rank</title>
+      </head>
+      <body>
+        <div>
+          <h1 class="title_word">Welcome to Space Survival</h1>
+          <video class="video-back" autoplay loop muted>
+            <source src="static\src\video (2).mp4" >
+          </video>
+        </div>
+        <table>
+          <tr>
+            <th>id</th>
+            <th>score</th>
+          </tr>
+          {% for i in range(len) %}
+          <tr>
+            {% for j in range(2) %}
+            <td>{{content[i][j]}}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+        <h3>You’re larger than this!</h3>
+        <h4>download Space Survival</h4>
+        <input class="btn1" id="input2" type="button" value="download" name="按鈕名稱" style="width:150px;height:50px;">
+        <input class="btn1" id="input_back2" type ="button" onclick="history.back()" value="Back"></input>
+      </body>
+  </html>

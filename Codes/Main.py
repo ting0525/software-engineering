@@ -87,7 +87,7 @@ def play():
                 death_expl = Explosion(player.rect.center, 'player')
                 Variable.ALL_SPRITES.add(death_expl)
                 sound.die_sound.play()
-                player.lives -= 3
+                player.lives -= 1
                 player.health = 100
                 player.hide()
 
@@ -152,7 +152,7 @@ def options():
 def url():
     urL='http://127.0.0.1:80/rank'
     webbrowser.get('windows-default').open_new(urL)
-    pygame.quit()
+    
     
     #while True:
     #    urllib.request.urlopen('http://127.0.0.1:80/rank')

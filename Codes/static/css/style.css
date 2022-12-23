@@ -34,7 +34,7 @@ table td{
 }
 
 .title_word{
-  color:rgb(255, 255, 255);
+  color:gold;
   text-align:center;
   z-index: 1;
   position:absolute;
@@ -88,6 +88,14 @@ table td{
   position:absolute;
   top: 90%;
   left: 10%;
+  width:150px;
+  height:30px;
+}
+
+#input_back2{
+  position:absolute;
+  top: 90%;
+  left: 55%;
   width:150px;
   height:30px;
 }

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session , jsonify
 from multiprocessing import connection
 import mysql.connector
 from flask_mysqldb import MySQL
@@ -15,20 +15,48 @@ app.config['MYSQL_PORT'] = '3306'             # Port號（預設就是3306)
 mysql = MySQL(app)
 '''
 
-
-connection = mysql.connector.connect(
-    host='127.0.0.1',
-    port='3306',
-    user='root',
-    password='123456'
+connection = mysql.connector.connect(  
+    host = '127.0.0.1' ,
+    port = '3306' , 
+    user = 'root', 
+    password = '123456'
 )
 
 cursor = connection.cursor()
 
+
+
+def partial_table(p):
+  prefix = set()
+  res = [0]
+  for i in range(1,len(p)):
+    prefix.add(p[:i])
+    postfix = {p[j:i + 1] for j in range(1,i + 1)}
+    res.append(len((prefix & postfix or {''}).pop()))
+  return res
+
+def kmp_match(s,p):
+  m = len(s)
+  n = len(p)
+  cur = 0 # 起始指標cur
+  table = partial_table(p)
+  while cur <= m - n:   #只去匹配前m-n個
+    for i in range(n):
+      if s[i + cur] != p[i]:
+        cur += max(i - table[i - 1],1) # 有了部分匹配表,我們不只是單純的1位1位往右移,可以一次移動多位
+        break
+    else:    
+      return True # loop從 break 中退出時，else 部分不執行。
+  return False
+
+
+
+
+
 app = Flask(__name__)
 
 
-@app.route('/rank', methods=['GET', 'POST'])
+@app.route('/rank' ,methods=['GET', 'POST'])
 def rank():
     if request.method == "POST":
         idtext = request.values.get('username')
@@ -41,21 +69,33 @@ def rank():
         all_id = cursor.fetchall()
         token = False
         for i in all_id:
-            print(i)
-            if id == i:
+            print(idtext)
+            print(i[0])
+            m = i[0]
+            token = kmp_match(m , idtext)
+            if token==True:
+                break
+            '''
+            if idtext in m:
                 token = True
                 print(token)
+                print("子字串比對成功")
                 break
+            else:
+                print("NO")
+            '''
         if token == True:
             cursor = connection.cursor()
             cursor.execute("USE `test`;")
-            select_id = 'SELECT id , score FROM `game2` where id=%s;'
+            select_id = "SELECT id , score FROM `game2` WHERE `id` LIKE '%%%s%%';" % (idtext)
             id_tuple = (idtext,)
             print(id_tuple)
-            cursor.execute(select_id, id_tuple)
+            cursor.execute(select_id)
+            #cursor.execute(select_id, id_tuple)
             content = cursor.fetchall()
             print(content)
-            return render_template('select.html', content=content)
+            length=len(content)
+            return render_template('select.html' , content=content , len=length)
         elif token == False:
             return render_template('Not find.html')
     else:
@@ -64,59 +104,100 @@ def rank():
         sql = "SELECT * FROM `game2` ORDER BY `score` DESC LIMIT 15;"
         cursor.execute(sql)
         content = cursor.fetchall()
-        number = (1, 2, 3, 4, 5)
-        return render_template('index.html', content=content, len=len(number))
+        number = (1,2,3,4,5)
+        return render_template('index.html' , content=content , len=len(number))
 
 
 @app.route('/api/add_message/<dic>', methods=['GET'])
 def add_message(dic):
-    if request.method == 'GET':
+    if request.method == 'GET': 
         id = request.json['id']
         score = request.json['score']
-        my_token = request.json['my_token']
+        my_token = request.json['my_token']  
         print(id)
         print(score)
         print(type(id))
         print(type(score))
         if my_token == 123456:
-            # print(type(data))
+            #print(type(data))
             cursor = connection.cursor()
             cursor.execute("USE `test`;")
-            # cursor.execute('CREATE TABLE `asd`(mystr varchar(20));')
-            # id = "handwrite"
-            # score = 87
-
-            insert_id = "INSERT INTO `game2` (id , score) VALUES(%s,%s);"
-            score_tuple = (id, score)
-
+            #cursor.execute('CREATE TABLE `asd`(mystr varchar(20));')
+            #id = "handwrite"
+            #score = 87
+        
+            insert_id = "INSERT INTO `game2` (id , score) VALUES(%s,%s);" 
+            score_tuple = (id,score)
+        
             cursor.execute(insert_id, score_tuple)
             connection.commit()
             cursor.execute("SELECT * FROM `game2` ORDER BY  `score` DESC LIMIT 3;")
             records = cursor.fetchall()
             for r in records:
                 print(r)
-            return jsonify({"dic": dic})
+            return jsonify({"dic":dic})
+    
 
 
-'''
-@app.route('/rank/select/' , methods=['GET' , 'POST'])
-def select():
-    if request.method == "POST":
-        id = request.form['id']
-        id = 'testlast'
-        cursor = connection.cursor()
-        cursor.execute("USE `test`;")
-        select_id = 'SELECT id , score FROM `game2` where id=%s;'
-        id_tuple = (id,)
-        cursor.execute(select_id, id_tuple)
-        content = cursor.fetchall()
-        return render_template('select.html' , content=content)
-    else:
-        return render_template('index.html' , content=content)
-'''
+
+
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=80)
+    app.run(host= '0.0.0.0',debug=True , port=80)
+    
+    
+    
+'''
+# 實現KMP算法的函數
+def KMP(text, pattern):
+ 
+    # 基本情況 1：模式為空
+    if not pattern:
+        print('The pattern occurs with shift 0')
+        return
+ 
+    # 基本情況 2：文本為空，或文本的長度小於模式的長度
+    if not text or len(pattern) > len(text):
+        print('Pattern not found')
+        return
+ 
+    chars = list(pattern)
+ 
+    # next[i] 存儲下一個最佳部分匹配的索引
+    next = [0] * (len(pattern) + 1)
+ 
+    for i in range(1, len(pattern)):
+        j = next[i + 1]
+ 
+        while j > 0 and chars[j] is not chars[i]:
+            j = next[j]
+ 
+        if j > 0 or chars[j] == chars[i]:
+            next[i + 1] = j + 1
+ 
+    j = 0
+    for i in range(len(text)):
+        if j < len(pattern) and text[i] == pattern[j]:
+            j = j + 1
+            if j == len(pattern):
+                #print('Pattern occurs with shift', (i - j + 1))
+                token = True
+                return token
+        elif j > 0:
+            j = next[j]
+            i = i - 1        # 因為 `i` 將在下一次迭代中遞增
+ 
+ 
+
+ 
+#text = 'ABCABAABCABAC'
+#pattern = 'CAB'
+ 
+#KMP(text, pattern)
+''' 
+    
+    
 
 '''
 def add_message(dic):
@@ -130,6 +211,7 @@ if __name__ == '__main__':
     app.run(host= '0.0.0.0',debug=True)
     
 '''
+
 
 '''
 connection = mysql.connector.connect(  
@@ -150,12 +232,12 @@ def record(content):
     connection.commit()
 '''
 
-# cur = mysql.connection.cursor()
-# cur.execute("INSERT INTO `game` (id , score) VALUES (%s,%d)" , (id , score))
-# mysql.connection.commit()
-
-
-# cur = mysql.connection.cursor()
-# sql = "INSERT INTO `game` (id , score) VALUES ('{id}' , '{score}');"
-# cur.execute(sql, id , score)
-# print(sql)
+#cur = mysql.connection.cursor()
+    #cur.execute("INSERT INTO `game` (id , score) VALUES (%s,%d)" , (id , score))
+    #mysql.connection.commit()
+    
+    
+    #cur = mysql.connection.cursor()
+        #sql = "INSERT INTO `game` (id , score) VALUES ('{id}' , '{score}');"
+        #cur.execute(sql, id , score)
+        #print(sql)
