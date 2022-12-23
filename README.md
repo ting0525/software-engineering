@@ -36,7 +36,7 @@ type module.txt
 pip install -r module.txt
 ```
 
-##start game
+## start game
 ```cd Codes
 python Main.py
 ```
