@@ -41,3 +41,9 @@ pip install -r module.txt
 cd Codes
 python Main.py
 ```
+
+## turn on web
+```shell
+cd Codes
+python exserver.py
+```
