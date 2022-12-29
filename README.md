@@ -7,15 +7,15 @@ pip install virtualenv
 
 ## create virtual environment
 ```shell
-virtualenv "name"
+virtualenv env
 ```
 ### windows
 ```shell
-"name"\Script\activate
+env\Scripts\activate
 ```
 ### linux
 ```shell
-source "name"/activate
+source env/activate
 ```
 ## leave virtual environment
 ```shell
@@ -24,14 +24,20 @@ deactivate
 
 ## export environment
 ```shell
-pip freeze > "name".txt
+pip freeze > module.txt
 ```
 
 ## check export
 ```shell
-type "name".txt
+type module.txt
 ```
 ## download requirement
 ```shell
-pip install -r "name".txt
+pip install -r module.txt
+```
+
+## start game
+```shell
+cd Codes
+python Main.py
 ```

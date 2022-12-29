@@ -40,11 +40,12 @@ table td{
   position:absolute;
   font-size: 60px;
   text-align:center;
-  left:25%;
+  left:30%;
+  font-family:fantasy;
 }
 
 .big_word{
-  color:rgb(255, 255, 255);
+  color:gold;
   text-align:center;
   z-index: 1;
   position:absolute;
@@ -52,6 +53,7 @@ table td{
   text-align:center;
   left:40%;
   top:35%;
+  font-family:fantasy;
 }
 
 .switch{
@@ -104,7 +106,7 @@ table td{
   color: #0099CC; 
   background: transparent; 
   border: 2px solid #0099CC;
-   
+  
   
 }
 
@@ -125,7 +127,7 @@ h3{
   position:absolute;
   top:20%;
   left:55%;
-  font-size: 35px;
+  font-size: 40px;
   color:rgb(16, 238, 246)
 }
 
@@ -133,18 +135,25 @@ h4{
   position:absolute;
   top:45%;
   left:55%;
-  font-size: 35px;
+  font-size: 40px;
   color:rgb(16, 238, 246)
+  
 }
 
 #input2{
   position:absolute;
-  top:60%;
+  top:65%;
   left:55%;
 }
 
 
-
+#py{
+  position:absolute;
+  top:3%;
+  left:22%;
+  width: 100px;
+  z-index: 1;
+}
 
 
 
