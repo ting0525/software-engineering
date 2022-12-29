@@ -23,10 +23,6 @@ img = ImageLoader()
 SCREEN = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.display.set_caption("太空生存戰")
 
-# Background image
-BG = pygame.image.load("../Images/Background/background2.jpg")
-
-
 def get_font(size):  # Returns Press-Start-2P in the desired size
     return pygame.font.Font("../font.ttf", size)
 
@@ -109,7 +105,7 @@ def play():
 
         # 畫面顯示
         initer.screen.fill(Variable.BLACK)
-        initer.screen.blit(img.game_background, (0, 0))
+        initer.screen.blit(img.currentBackground, (0, 0))
         Variable.ALL_SPRITES.draw(initer.screen)
         draw_text(initer.screen, str(score), 18, Variable.WIDTH / 2, 10)
         draw_health(initer.screen, player.health, 5, 15)
@@ -130,21 +126,44 @@ def options():
 
         OPTIONS_TEXT = get_font(45).render("This is the OPTIONS screen.", True, "Black")
         OPTIONS_RECT = OPTIONS_TEXT.get_rect()
-        SCREEN.blit(img.background_img2, OPTIONS_RECT)
+        SCREEN.blit(img.currentBackground, OPTIONS_RECT)
 
-        OPTIONS_BACK = Button(image=pygame.image.load("../assets/Play Rect.png"), pos=(300, 400),
+        BACKGROUND1 = Button(image=pygame.image.load("../assets/Play Rect.png"), pos=(300, 250),
+                              text_input="背景一", font=get_font(50), base_color="Black", hovering_color="White")
+
+        BACKGROUND2 = Button(image=pygame.image.load("../assets/Play Rect.png"), pos=(300, 400),
+                              text_input="背景二", font=get_font(50), base_color="Black", hovering_color="White")
+
+        BACKGROUND3 = Button(image=pygame.image.load("../assets/Play Rect.png"), pos=(300, 550),
+                              text_input="背景三", font=get_font(50), base_color="Black", hovering_color="White")
+
+        OPTIONS_BACK = Button(image=pygame.image.load("../assets/Play Rect.png"), pos=(300, 700),
                               text_input="Back", font=get_font(50), base_color="Black", hovering_color="White")
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
 
-        OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
-        OPTIONS_BACK.update(SCREEN)
+        for button in [BACKGROUND1, BACKGROUND2, BACKGROUND3, OPTIONS_BACK]:
+            button.changeColor(MENU_MOUSE_POS)
+            button.update(SCREEN)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
+
+
+                if BACKGROUND1.checkForInput(OPTIONS_MOUSE_POS):
+                    ImageLoader.currentBackground = ImageLoader.background_img1
+
+                if BACKGROUND2.checkForInput(OPTIONS_MOUSE_POS):
+                    ImageLoader.currentBackground = ImageLoader.background_img2
+
+                if BACKGROUND3.checkForInput(OPTIONS_MOUSE_POS):
+                    ImageLoader.currentBackground = ImageLoader.background_img3
+
                 if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
                     main_menu()
+
 
         pygame.display.update()
 
@@ -163,7 +182,7 @@ def main_menu():
 
     while True:
 
-        SCREEN.blit(BG, (0, 0))
+        SCREEN.blit(img.menu, (0, 0))
 
         # Getting Mouse position
         MENU_MOUSE_POS = pygame.mouse.get_pos()
@@ -189,6 +208,7 @@ def main_menu():
                              text_input="離開", font=get_font(50), base_color="#d7fcd4", hovering_color="White")
 
         SCREEN.blit(MENU_TEXT, MENU_RECT)
+        SCREEN.blit(img.QRCODE, (1200, 500))
 
         for button in [PLAY_BUTTON, OPTIONS_BUTTON, URL_BUTTON, QUIT_BUTTON]:
             button.changeColor(MENU_MOUSE_POS)

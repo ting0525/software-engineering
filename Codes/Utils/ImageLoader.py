@@ -18,10 +18,15 @@ class ImageLoader:
     Background = "../Images/Background"
 
     # Background images
-    background_img = pygame.image.load(os.path.join(Background, "background.png")).convert()
-    background_img2 = pygame.image.load(os.path.join(Background, "background2.jpg")).convert()
-    game_background = pygame.image.load(os.path.join(Background, "game_background.jpg")).convert()
+    background_img1 = pygame.image.load(os.path.join(Background, "background1.jpg")).convert()
 
+    background_img2 = pygame.image.load(os.path.join(Background, "background2.jpg")).convert()
+    background_img3 = pygame.image.load(os.path.join(Background, "background3.jpg")).convert()
+
+    menu = pygame.image.load(os.path.join(Background, "menubackground.jpg")).convert()
+    currentBackground = background_img1
+
+    QRCODE = pygame.image.load(os.path.join(Image_folder, "QRCODE.jpg")).convert()
 
     # Player images
     player_img = pygame.image.load(os.path.join(Image_folder, "player.png")).convert()

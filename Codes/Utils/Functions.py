@@ -92,7 +92,7 @@ def frame():
 
         # 畫面更新
         screen.fill(Variable.BLACK)
-        screen.blit(img.background_img2, (0, 0))
+        screen.blit(img.currentBackground, (0, 0))
 
         # screen.blit(background_img , (0,0))
         screen.blit(text_surface, (input_box.x + 5, input_box.y + 5))

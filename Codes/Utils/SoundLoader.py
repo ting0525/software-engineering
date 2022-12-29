@@ -1,5 +1,7 @@
 import pygame
 import os
+
+
 class SoundLoader:
     # 載入音樂、音效
     Sound_folder = "../Sound"
