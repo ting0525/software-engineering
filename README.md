@@ -55,4 +55,4 @@ CREATE TABLE game2(
 		`score` INT
 );
 ```
-![網頁介面](/path/to/img.jpg)
+![網頁介面](software-engineering/Images/web.png)
