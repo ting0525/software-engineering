@@ -55,4 +55,6 @@ CREATE TABLE game2(
 		`score` INT
 );
 ```
-![網頁介面](https://github.com/ting0525/software-engineering/blob/master/Images/web.png)
+![web](https://github.com/ting0525/software-engineering/blob/master/Images/web.png)
+![gmae](https://github.com/ting0525/software-engineering/blob/master/Images/game.png)
+
