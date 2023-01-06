@@ -47,3 +47,11 @@ python Main.py
 cd Codes
 python exserver.py
 ```
+
+## MySQL
+```shell
+CREATE TABLE game2(
+		`id` varchar(20) primary key,      
+		`score` INT
+);
+```
